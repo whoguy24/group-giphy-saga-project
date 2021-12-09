@@ -99,6 +99,8 @@ function* watcherSaga() {
     yield takeEvery('UPDATE_FAVORITES', updateFavorites);
 }
 
+const sagaMiddleware = createSagaMiddleware();
+
 // combines the reducers into one store
 const store = createStore(
     combineReducers({
@@ -107,8 +109,6 @@ const store = createStore(
     }),
     applyMiddleware(logger, sagaMiddleware)
 );
-
-const sagaMiddleware = createSagaMiddleware();
 
 // passes the watcherSaga into the sagaMiddleware
 sagaMiddleware.run(watcherSaga);
