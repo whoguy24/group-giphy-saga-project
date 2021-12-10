@@ -7,7 +7,6 @@ In this project you will need to utilize React, Redux, Redux-Saga and integrate 
 ## Team Setup
 Do not clone this repository. Instead, have one person create a new repo by clicking on the **Use this template** button to make a copy. Make your team collaborators on the new repo you have created. The rest of the team members that did not make the initial repo will clone directly from the person who created the new repo, **do NOT fork** the repo.
 
-
 ## Create Database and Tables
 
 See the `database.sql` file for database setup and details. It offers some of the SQL to get you started but you'll need to set up your tables and the relationships between them.
@@ -67,3 +66,14 @@ You are given two router modules on the server with stubs for the routes you may
     - User should be able to edit an existing category
     - User should be able to delete/remove an existing category
 
+############################### CHECKLIST
+
+[x] Install repos and NPM stuff
+[] Determine and create database structure
+[] Import boilerplate sagas nonsense, add reducers (index.js)
+[] Create search functionality (GET api request)
+[] Write server saga request from provided search string
+[] Build search view DOM
+[] Build favorites view DOM
+[] Build app.js
+[] Build functionality that allows user to select giphy as a favorite and save to the database
