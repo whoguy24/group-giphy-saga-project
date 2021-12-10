@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 
 function SearchResultItem({ result }) {
 
+    // Define dispatch variable
     const dispatch = useDispatch();
 
     // Function to add searchItemResult/Giphy object to favorites reducer
@@ -18,7 +19,7 @@ function SearchResultItem({ result }) {
         <div style={{display: 'inline-block'}}>
             <img src={result.images.fixed_height.url}></img>
             <div>
-                <button onClick = { () => {addToFavorites()}}>Add to Favorites</button>
+                <button onClick ={addToFavorites}>Add to Favorites</button>
             </div>
         </div>
     )

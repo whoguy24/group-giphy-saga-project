@@ -87,6 +87,8 @@ function* getSearch(action) {
 }
 
 function* newFavorites(action) {
+    console.log('In newFavorites Saga', action.payload);
+    
     try {
         const response = yield axios({
             method: 'POST',
@@ -94,7 +96,7 @@ function* newFavorites(action) {
             data: action.payload
         });
         yield put({
-            type: 'NEW_FAVORITES',
+            type: 'ADD_FAVORITES',
             payload: response.data
         })
     } catch (err) {

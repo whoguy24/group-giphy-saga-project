@@ -25,7 +25,21 @@ router.get('/', (req, res) => {
 
 // add a new favorite
 router.post('/', (req, res) => {
-  res.sendStatus(200);
+  const giphy = req.body;
+  const sqlText = 
+      `
+          INSERT INTO favorites (url )
+          VALUES ( $1 )
+      `;
+  pool.query(sqlText, [ giphy.url ])
+  .then((result) => {
+      console.log(`Added gif to the database`, result);
+      res.sendStatus(201);
+  })
+  .catch((error) => {
+      console.log(`Error making database query ${sqlText}`, error);
+      res.sendStatus(500);
+  })
 });
 
 // update given favorite with a category id
