@@ -127,8 +127,6 @@ function* watcherSaga() {
     yield takeEvery('SEARCH_GIPHY', getSearch);
 }
 
-const sagaMiddleware = createSagaMiddleware();
-
 // combines the reducers into one store
 const sagaMiddleware = createSagaMiddleware();
 
