@@ -4,6 +4,7 @@ import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
 import SearchForm from '../SearchForm/SearchForm';
 import FavoritesList from '../FavoritesList/FavoritesList.jsx';
+import './App.css';
 
 // APP COMPONENT FUNCTION
 function App() {
