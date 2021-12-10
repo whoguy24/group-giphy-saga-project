@@ -2,7 +2,6 @@
 import React from 'react';
 import { HashRouter as Router, Route, Link } from 'react-router-dom';
 
-<<<<<<< HEAD
 // APP COMPONENT FUNCTION
 function App() {
   return (
@@ -28,7 +27,6 @@ function App() {
 
       </Router>
 
-=======
 import SearchForm from '../SearchForm/SearchForm';
 
 function App(props) {
@@ -36,7 +34,6 @@ function App(props) {
     <div>
       <h1>Giphy Search!</h1>
       <SearchForm />
->>>>>>> 00fcd907c64969646f09440826b377ba44cd5124
     </div>
   );
 }
