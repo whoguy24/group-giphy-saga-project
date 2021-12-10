@@ -96,8 +96,7 @@ function* newFavorites(action) {
             data: action.payload
         });
         yield put({
-            type: 'ADD_FAVORITES',
-            payload: response.data
+            type: 'SET_FAVORITES'
         })
     } catch (err) {
         console.error(err);

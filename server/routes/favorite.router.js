@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
           INSERT INTO favorites (url )
           VALUES ( $1 )
       `;
-  pool.query(sqlText, [ giphy.url ])
+  pool.query(sqlText, [ giphy.images.fixed_height.url ])
   .then((result) => {
       console.log(`Added gif to the database`, result);
       res.sendStatus(201);
