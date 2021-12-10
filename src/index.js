@@ -28,6 +28,15 @@ const categoryReducer = (state = [], action) => {
     }
 }
 
+const searchResultsReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_RESULTS':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // THE saga functions
 function* getFavorites() {
     try {
@@ -52,6 +61,23 @@ function* getCategories() {
         });
         yield put({
             type: 'SET_CATEGORY',
+            payload: response.data
+        })
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+function* getSearch(action) {
+    console.log('action', action.payload);
+    
+    try {
+        const response = yield axios({
+            method: 'GET',
+            url: `/search/${action.payload}`
+        });
+        yield put({
+            type: 'SET_RESULTS',
             payload: response.data
         })
     } catch (err) {
@@ -87,7 +113,7 @@ function* updateFavorites(action) {
             payload: response.data
         })
     } catch (err) {
-        console.error(err);
+        console.error('updateFavorites error', err);
     }
 }
 
@@ -97,18 +123,20 @@ function* watcherSaga() {
     yield takeEvery('SET_CATEGORY', getCategories);
     yield takeEvery('ADD_FAVORITES', addFavorites);
     yield takeEvery('UPDATE_FAVORITES', updateFavorites);
+    yield takeEvery('SEARCH_GIPHY', getSearch);
 }
+
+const sagaMiddleware = createSagaMiddleware();
 
 // combines the reducers into one store
 const store = createStore(
     combineReducers({
         favoritesReducer,
-        categoryReducer
+        categoryReducer,
+        searchResultsReducer
     }),
     applyMiddleware(logger, sagaMiddleware)
 );
-
-const sagaMiddleware = createSagaMiddleware();
 
 // passes the watcherSaga into the sagaMiddleware
 sagaMiddleware.run(watcherSaga);
