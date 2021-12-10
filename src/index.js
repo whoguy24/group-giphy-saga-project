@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import logger from 'redux-logger'
+import logger from 'redux-logger';
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import createSagaMiddleware from 'redux-saga';
