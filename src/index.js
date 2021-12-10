@@ -2,13 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { createLogger } from 'redux-logger'
+import logger from 'redux-logger'
 import { put, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import createSagaMiddleware from 'redux-saga';
 import App from './components/App/App';
-
-const logger = createLogger();
 
 // reducer for storing information from the database
 const favoritesReducer = (state = [], action) => {
