@@ -11,7 +11,7 @@ import App from './components/App/App';
 // reducer for storing information from the database
 const favoritesReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_FAVORITES':
+        case 'ADD_FAVORITES':
             return action.payload;
         default:
             return state;
@@ -36,11 +36,11 @@ function* getFavorites() {
             url: '/api/favorite'
         });
         yield put({
-            type: 'SET_FAVORITES',
+            type: 'ADD_FAVORITES',
             payload: response.data
         })
     } catch (err) {
-        console.error(err);
+        console.error('in getFavorites error', err);
     }
 }
 
@@ -59,7 +59,7 @@ function* getCategories() {
     }
 }
 
-function* addFavorites(action) {
+function* newFavorites(action) {
     try {
         const response = yield axios({
             method: 'POST',
@@ -67,7 +67,7 @@ function* addFavorites(action) {
             data: action.payload
         });
         yield put({
-            type: 'SET_FAVORITES',
+            type: 'NEW_FAVORITES',
             payload: response.data
         })
     } catch (err) {
@@ -95,11 +95,13 @@ function* updateFavorites(action) {
 function* watcherSaga() {
     yield takeEvery('SET_FAVORITES', getFavorites);
     yield takeEvery('SET_CATEGORY', getCategories);
-    yield takeEvery('ADD_FAVORITES', addFavorites);
+    yield takeEvery('NEW_FAVORITES', newFavorites);
     yield takeEvery('UPDATE_FAVORITES', updateFavorites);
 }
 
 // combines the reducers into one store
+const sagaMiddleware = createSagaMiddleware();
+
 const store = createStore(
     combineReducers({
         favoritesReducer,
@@ -107,8 +109,6 @@ const store = createStore(
     }),
     applyMiddleware(logger, sagaMiddleware)
 );
-
-const sagaMiddleware = createSagaMiddleware();
 
 // passes the watcherSaga into the sagaMiddleware
 sagaMiddleware.run(watcherSaga);
