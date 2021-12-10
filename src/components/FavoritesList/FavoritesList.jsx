@@ -3,6 +3,7 @@ import FavoriteItem from '../FavoriteItem/FavoriteItem.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 
 function FavoritesList() {
+    
     const dispatch = useDispatch();
     // access our reducer in this component
     const favoritesReducer = useSelector(store => store.favoritesReducer);
@@ -22,11 +23,11 @@ function FavoritesList() {
 
     return (
         <ul>
-            {/* {favoritesReducer.map((favoriteItem) => {
+            {favoritesReducer.map((favoriteItem) => {
                 return (
                     <FavoriteItem key={favoriteItem.id} favoriteItem={favoriteItem} />
                 );
-            })} */}
+            })}
         </ul>
     );
 
