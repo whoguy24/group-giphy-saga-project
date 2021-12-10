@@ -11,7 +11,7 @@ import App from './components/App/App';
 // reducer for storing information from the database
 const favoritesReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_FAVORITES':
+        case 'ADD_FAVORITES':
             return action.payload;
         default:
             return state;
@@ -45,11 +45,11 @@ function* getFavorites() {
             url: '/api/favorite'
         });
         yield put({
-            type: 'SET_FAVORITES',
+            type: 'ADD_FAVORITES',
             payload: response.data
         })
     } catch (err) {
-        console.error(err);
+        console.error('in getFavorites error', err);
     }
 }
 
@@ -68,9 +68,10 @@ function* getCategories() {
     }
 }
 
+
 function* getSearch(action) {
     console.log('action', action.payload);
-    
+   
     try {
         const response = yield axios({
             method: 'GET',
@@ -85,7 +86,7 @@ function* getSearch(action) {
     }
 }
 
-function* addFavorites(action) {
+function* newFavorites(action) {
     try {
         const response = yield axios({
             method: 'POST',
@@ -93,7 +94,7 @@ function* addFavorites(action) {
             data: action.payload
         });
         yield put({
-            type: 'SET_FAVORITES',
+            type: 'NEW_FAVORITES',
             payload: response.data
         })
     } catch (err) {
@@ -121,14 +122,14 @@ function* updateFavorites(action) {
 function* watcherSaga() {
     yield takeEvery('SET_FAVORITES', getFavorites);
     yield takeEvery('SET_CATEGORY', getCategories);
-    yield takeEvery('ADD_FAVORITES', addFavorites);
+    yield takeEvery('NEW_FAVORITES', newFavorites);
     yield takeEvery('UPDATE_FAVORITES', updateFavorites);
     yield takeEvery('SEARCH_GIPHY', getSearch);
 }
 
+// combines the reducers into one store
 const sagaMiddleware = createSagaMiddleware();
 
-// combines the reducers into one store
 const store = createStore(
     combineReducers({
         favoritesReducer,
