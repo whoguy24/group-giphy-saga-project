@@ -21,7 +21,7 @@ const favoritesReducer = (state = [], action) => {
 // reducer for storing the category from the database
 const categoryReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_CATEGORY':
+        case 'ADD_CATEGORY':
             return action.payload;
         default:
             return state;
@@ -58,9 +58,9 @@ function* getCategories() {
         const response = yield axios({
             method: 'GET',
             url: '/api/category'
-        });
+        }); console.log(response.data);
         yield put({
-            type: 'SET_CATEGORY',
+            type: 'ADD_CATEGORY',
             payload: response.data
         })
     } catch (err) {
@@ -110,7 +110,7 @@ function* updateFavorites(action) {
             data: action.payload
         });
         yield put({
-            type: 'SET_FAVORITES',
+            type: 'ADD_FAVORITES',
             payload: response.data
         })
     } catch (err) {
