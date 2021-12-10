@@ -7,9 +7,11 @@ function FavoritesList() {
     const dispatch = useDispatch();
     // access our reducer in this component
     const favoritesReducer = useSelector(store => store.favoritesReducer);
+    const categoryReducer = useSelector(store => store.categoryReducer);
+    
 
     useEffect(() => {
-        console.log('in useEffect')
+        getCategories();
         getFavorites();
     }, []);
 
@@ -18,6 +20,20 @@ function FavoritesList() {
         console.log('inside getFavorites')
         dispatch ({
         type: 'SET_FAVORITES'
+        })
+    };
+
+    const getCategories = () => {
+        console.log('inside getCategories')
+        dispatch ({
+        type: 'SET_CATEGORY'
+        })
+    };
+
+    const updateFavorites = () => {
+        console.log('inside updateFavorites')
+        dispatch ({
+        type: 'UPDATE_FAVORITES'
         })
     };
 
